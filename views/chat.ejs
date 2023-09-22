@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socket.IO Example</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+
+  
+
+  <style>
+
+/* Rest of the CSS styles... */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Chat Container Styles */
+#chatContainer {
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+#loginForm,
+#chatContainer {
+  text-align: center;
+}
+
+/* Message Container Styles */
+#messageContainer {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+#messageContainer div {
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  word-wrap: break-word;
+}
+
+/* Input Styles */
+#messageInput,
+#targetIdInput {
+  padding: 8px;
+  font-size: 14px;
+  width: 60%;
+  margin-right: 10px;
+}
+
+#imageInput {
+  margin-right: 10px;
+}
+
+/* Button Styles */
+button {
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f9f9f9;
+}
+
+#delete-selected-btn {
+  display: none;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#delete-selected-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Custom Delete Confirmation Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #f9f9f9;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.modal-buttons button {
+  margin-left: 10px;
+}
+
+/* Stylish Alert Box Styles */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red background color for the alert */
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  display: none;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+/* Chat bubble styles for the current user's messages */
+#messageContainer .selected {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Chat bubble styles for other users' messages */
+#messageContainer div[data-message-sender]:not(.selected) {
+  background-color: #2196f3;
+  color: white;
+}
+
+
+
+#chatHistory div {
+  padding: 10px;
+  border-radius: 10px;
+  transition: background-color 0.3s; /* Smooth background color transition on hover */
+}
+
+#chatHistory div.selected {
+  background-color: #dcf8c6; /* Light green background for selected messages */
+}
+
+/* Style the Delete button */
+#delete-selected-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  background-color: #f44336;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ..... */
+
+#progressBar {
+    width: 100%;
+    background-color: #ccc;
+    height: 20px;
+}
+
+#progress {
+    width: 0%;
+    height: 100%;
+    background-color: #4CAF50;
+}
+
+#progressText {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+
+  </style>
+
+  
+</head>
+<body>
+  <div id="loginForm">
+    <h2>Login</h2>
+    <input type="text" id="userId" placeholder="Sender ID or Name">
+    <button onclick="signIn()">Sign In</button>
+  </div>
+<!--
+  <div id="chatContainer" style="display: none;">
+    <h2>Chat</h2>
+    <div id="messageContainer"></div>
+    <div id="chatHistory"></div>
+  
+    <input onchange="kilvish()" type="text" id="targetIdInput" placeholder="Receiver Name or ID">
+    <br> <br> <br>
+    <input type="text" id="messageInput" placeholder="Type your message">
+    <input type="file" id="imageInput">
+    <br> <br>
+    <button onclick="sendMessage()">Send</button>
+  </div>
+-->
+  <div id="chatContainer" style="display: none;">
+    <h2>Chat</h2>
+    <div id="userStatus" style="display: none;"></div>
+    
+    <div id="messageContainer"></div>
+    <div id="chatHistory"></div>
+  
+    <input onchange="kilvish()" type="text" id="targetIdInput" placeholder="Receiver Name or ID">
+    <br> <br> <br>
+    <input type="text" id="messageInput" placeholder="Type your message">
+    <input type="file" id="imageInput">
+    <br> <br>
+    <div id="uploadProgress" style="display: none;">
+      <div id="progressBar">
+          <div id="progress"></div>
+      </div>
+      <p id="progressText">Uploading...</p>
+    </div>  
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  
+  
+  <button id="delete-selected-btn" style="display: none; ">
+    <img src="../del.ico" alt="Delete" />
+  </button>
+
+  <!-- Custom Delete Confirmation Modal -->
+<div id="deleteModal" class="modal">
+  <div class="modal-content">
+    <p>Delete message ?</p>
+    <div class="modal-buttons">
+      <button id="confirmDeleteBtn">Delete for everyOne</button>
+      <button id="cancelDeleteBtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="alertBox" class="alert">
+  <span class="closebtn" onclick="closeAlert()">&times;</span>
+  <strong>Alert:</strong> You can only delete your own messages.
+</div>
+  
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+
+// Add event listener for "Enter" key press in the message input field
+document.getElementById("messageInput").addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    sendMessage();
+  }
+});
+
+// Add event listener for "Enter" key press in the message input field
+document.getElementById("userId").addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    signIn();
+  }
+});
+
+let currentUser = null;
+let targetUserId = null; //
+
+
+
+    const socket = io(); // Connect to the server
+    //const socket = io('wss://192.168.1.7:3005');
+
+    //const socket = io('http://192.168.1.7:3005');
+
+
+    const loginForm = document.getElementById("loginForm");
+    const chatContainer = document.getElementById("chatContainer");
+    const messageContainer = document.getElementById("messageContainer");
+    const messageInput = document.getElementById("messageInput");
+    const imageInput = document.getElementById("imageInput");
+    const userIdInput = document.getElementById("userId");
+    const targetIdInput = document.getElementById("targetIdInput");
+    const userStatusDiv = document.getElementById("userStatus");
+
+     let clientId = null;
+     
+
+     msgID = [];
+     sender = userIdInput.value
+     receiver = targetIdInput.value
+
+    function kilvish(){
+      const targetId = targetIdInput.value;
+      const sourceId = userIdInput.value;
+
+      targetUserId = targetId
+      currentUser = sourceId
+      
+      socket.emit('chatHistory', {sourceId: sourceId, targetId: targetId});
+      socket.emit("checkUserStatus", targetId);
+    
+    }
+
+
+
+    function signIn() {
+      
+      clientId = userIdInput.value;
+      loginForm.style.display = "none";
+      chatContainer.style.display = "block";
+
+      // Send the "signIn" event to the server
+      socket.emit("signIn", clientId);
+      
+    }
+
+    socket.on("userStatus", function (statusData) {
+    if (statusData.userId === targetUserId) {
+        const statusMessage = statusData.online ? "Online" : "Offline";
+        userStatusDiv.innerText = `${targetUserId} is ${statusMessage}`;
+        userStatusDiv.style.color = statusData.online ? "green" : "red";
+        userStatusDiv.style.display = "block";
+    }
+});
+
+
+    async function sendMessage() {  console.log("send msgs called ")
+      const message = messageInput.value;
+      const targetId = targetIdInput.value;
+      const sourceId = userIdInput.value;
+      const file = imageInput.files[0];
+
+            if (message === ""  || message.trim() === ''  ) {
+              if(!file){
+                return;
+              }
+        
+            }
+
+      // Convert the image file to Base64 string
+      let imgUTF8 = null;
+      if (file) {
+      
+        uploadFile();
+
+        const formData = new FormData();
+            formData.append("sourceId", sourceId);
+            formData.append("targetId", targetId);
+            formData.append("message", message);
+             formData.append('file', file);
+
+
+         const response = await fetch('http://62.72.5.222:3005/chat/upload', {
+    method: 'POST',
+    body: formData
+    });
+
+    if (response.ok) {
+      hideProgressBar();
+        console.log('Upload successful');
+    } else {
+      hideProgressBar();
+        console.error('Upload failed');
+    }
+
+    
+
+        const { filePath , filename, mimetype } = await response.json();
+
+       // alert(mimetype)
+
+        sendSocketMessage(message, targetId, filename, filePath, mimetype);
+
+
+        
+      } else {
+        sendSocketMessage(message, targetId);
+      }
+
+      messageInput.value = ""; // Clear the input field
+      imageInput.value = ""; // Clear the file input
+    }
+
+    function sendSocketMessage(message, targetId, filename = null, filePath = null, mimetype=null) {
+     
+      // Send the "message" event to the server
+      socket.emit("message", {
+        sourceId: clientId,
+        targetId: targetId,
+        message: message,
+        filename: filename,
+        filePath: filePath,
+        mimetype: mimetype
+      });
+
+      socket.emit('chatHistory', {sourceId: clientId, targetId: targetId});
+
+    }
+
+
+    // Event handler for "message" event
+ socket.on("message", function(latestMsg) {  
+
+  
+  console.log("........latest Msg..",latestMsg)
+
+      const chatHistoryDiv = document.getElementById('chatHistory');
+
+      const messageDiv = document.createElement('div');
+      messageDiv.setAttribute('id', latestMsg[0].id); 
+
+ 
+
+if (latestMsg[0].mimetype.startsWith('txt')) {
+// txt
+messageDiv.innerHTML = `<strong>${latestMsg[0].user_from}</strong>: ${latestMsg[0].message}`;
+} else if (latestMsg[0].mimetype.startsWith('image/')) {
+// Image message
+messageDiv.innerHTML = `<strong>${latestMsg[0].user_from}</strong>: <img src="${latestMsg[0].filePath}" alt="Image" style="max-width: 200px; max-height: 150px;" /> <br>  ${latestMsg[0].message} `;
+} else if (latestMsg[0].mimetype.startsWith('video/')) {
+// Video message
+messageDiv.innerHTML = `<strong>${latestMsg[0].user_from}</strong>: <video src="${latestMsg[0].filePath}" controls controls style="max-width: 300px; max-height: 200px;" ></video> <br>  ${latestMsg[0].message}`;
+} else if (latestMsg[0].mimetype.startsWith('audio/')) {
+// Audio message
+messageDiv.innerHTML = `<strong>${latestMsg[0].user_from}</strong>: <audio src="${latestMsg[0].filePath}" controls></audio> <br>  ${latestMsg[0].message}`;
+} else {
+// Other file types
+messageDiv.innerHTML = `<strong>${latestMsg[0].user_from}</strong>: <a href="${latestMsg[0].filePath}" target="_blank">Download File</a> <br>  ${latestMsg[0].message}`;
+}
+
+messageDiv.addEventListener("click", function () {
+        //  msgID.push(messageDiv.id)
+         
+    messageDiv.classList.toggle("selected");
+    updateDeleteButtonVisibility();
+  });
+
+ 
+chatHistoryDiv.appendChild(messageDiv);
+
+});
+
+
+
+      // Listen for the 'chatHistory' event from the server
+      socket.on('chatHistory', function (chatHistory) {
+
+        console.log(chatHistory)
+      
+      const chatHistoryDiv = document.getElementById('chatHistory');
+
+      chatHistoryDiv.innerHTML = '';
+
+  
+      chatHistory.forEach(message => {
+        const messageDiv = document.createElement('div');
+        messageDiv.setAttribute('id', message.id);
+        messageDiv.setAttribute('data-message-sender', message.user_from);
+         
+       
+
+        if (message.mimetype.startsWith('txt')) {
+          // txt
+          messageDiv.innerHTML = `<strong>${message.user_from}</strong>: ${message.message}`;
+        } else if (message.mimetype.startsWith('image/')) {
+          // Image message
+          messageDiv.innerHTML = `<strong>${message.user_from}</strong>: <img src="${message.filePath}" alt="Image" style="max-width: 200px; max-height: 150px;" /> <br> ${message.message} `;
+        } else if (message.mimetype.startsWith('video/')) {
+          // Video message
+          messageDiv.innerHTML = `<strong>${message.user_from}</strong>: <video src="${message.filePath}" controls controls style="max-width: 300px; max-height: 200px;" ></video> <br> ${message.message}`;
+        } else if (message.mimetype.startsWith('audio/')) {
+          // Audio message
+          messageDiv.innerHTML = `<strong>${message.user_from}</strong>: <audio src="${message.filePath}" controls></audio> <br> ${message.message}`;
+        } else {
+          // Other file types
+          messageDiv.innerHTML = `<strong>${message.user_from}</strong>: <a href="${message.filePath}" target="_blank">Download File</a> <br> ${message.message} `;
+        }
+
+        messageDiv.addEventListener("click", function () {
+        //  msgID.push(messageDiv.id)
+         
+    messageDiv.classList.toggle("selected");
+    updateDeleteButtonVisibility();
+  });
+
+
+               
+   chatHistoryDiv.appendChild(messageDiv);
+
+      });
+    });
+
+
+    //---------------
+    function updateDeleteButtonVisibility() {
+  const selectedMessages = document.querySelectorAll(".selected");
+  if (selectedMessages.length > 0) {
+    deleteButton.style.display = "block";
+  } else {
+    deleteButton.style.display = "none";
+  }
+}
+
+//----------------
+const deleteButton = document.getElementById("delete-selected-btn");
+
+
+// JavaScript function to close the alert box
+function closeAlert() {
+  document.getElementById("alertBox").style.display = "none";
+}
+
+// Inside the "deleteButton" click event listener
+deleteButton.addEventListener("click", function () {
+
+  const targetId = targetIdInput.value;
+      const sourceId = userIdInput.value;
+
+  const selectedMessages = document.querySelectorAll(".selected");
+  if (selectedMessages.length > 0) {
+    // Create arrays to store the selected message IDs sent by the current user and other users
+    const currentUserMessageIds = [];
+    const otherUserMessageIds = [];
+
+    selectedMessages.forEach((message) => {
+      const messageId = message.getAttribute("id");
+      const messageSender = message.getAttribute("data-message-sender");
+
+
+      // Check if the message is sent by the current user
+      if (messageSender === currentUser) {
+        currentUserMessageIds.push(messageId);
+      } else {
+        otherUserMessageIds.push(messageId);
+      }
+    });
+
+    if (otherUserMessageIds.length > 0) {
+      // Show the stylish alert box to inform the user
+      const alertBox = document.getElementById("alertBox");
+      alertBox.style.display = "block";
+
+      // Close the alert box after 3 seconds (adjust the timeout as needed)
+      setTimeout(closeAlert, 3000);
+
+      // Exit the function, preventing further actions
+      return;
+    }
+
+    // Proceed with the deletion process for messages sent by the current user
+    if (currentUserMessageIds.length > 0) {
+      // Show the custom delete confirmation modal if there are messages to delete
+      const deleteModal = document.getElementById("deleteModal");
+      deleteModal.style.display = "block";
+
+      // When the Delete button inside the modal is clicked
+      document.getElementById("confirmDeleteBtn").addEventListener("click", function () { 
+        // Emit the "delete" event to the server with the array of message IDs
+        socket.emit("delete", currentUserMessageIds, targetId);
+        selectedMessages.forEach((message) => {
+          message.remove();
+        });
+        updateDeleteButtonVisibility();
+        deleteModal.style.display = "none";
+      });
+
+      // When the Cancel button inside the modal is clicked
+      document.getElementById("cancelDeleteBtn").addEventListener("click", function () {
+        deleteModal.style.display = "none";
+      });
+    }
+  }
+});
+
+
+
+ socket.on("messagesDeleted", function(IDs) {  
+  const targetId = targetIdInput.value;
+      const sourceId = userIdInput.value;
+
+      currentUser = sourceId
+      
+      socket.emit('chatHistory', {sourceId: sourceId, targetId: targetId});
+})
+
+//--------------------
+
+// Get references to HTML elements
+const uploadProgress = document.getElementById('uploadProgress');
+const progressBar = document.getElementById('progress');
+const progressText = document.getElementById('progressText');
+
+// Function to display the progress bar
+function showProgressBar() {
+    uploadProgress.style.display = 'block';
+}
+
+// Function to update the progress bar
+function updateProgressBar(percentage) {
+    progressBar.style.width = percentage + '%';
+    progressText.innerText = `Uploading... ${percentage}%`;
+}
+
+// Function to hide the progress bar
+function hideProgressBar() {
+    uploadProgress.style.display = 'none';
+}
+
+// Simulated file upload
+function uploadFile() {
+    showProgressBar();
+
+    // Simulated upload progress (0 to 100%)
+    let progress = 0;
+    const interval = setInterval(() => {
+        if (progress >= 100) {
+            clearInterval(interval);
+            hideProgressBar();
+        } else {
+            progress += 1;
+            updateProgressBar(progress);
+        }
+    }, 100);
+}
+
+
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,94 @@
+<%- include ("header.ejs") %>
+<%- include ("navbar.ejs") %>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="full-city">
+                    <div class="card-header">
+                  <h4>help & Support Inquiry </h4>
+                </div>
+                <font color="green" size="5"><%- output %></font>
+                <form method="post" action="/support"  class="needs-validation" novalidate="">
+                <div class="form-group row">
+                  <div class="form-group add-cities col-md-6">
+                      <label class="control-label" for="name">Support Email</label>
+                      <input type="text" name="support_email" id="autocomplete" class="form-control" onfocus="geolocate()" placeholder="Enter Email" required="" auto-complete="Off">
+                      <!--<input type="number" name="city" class="form-control required" placeholder="Enter City Name">-->
+                  </div>
+                   <div class="form-group add-cities col-md-6">
+                      <label class="control-label" for="name">Support Contact</label>
+                      <input type="tel" id="phone" name="support_contact" class="form-control" placeholder=" Please Enter Phone Number" required="" autocomplete="off">
+                      <!--<input type="number" name="city" class="form-control required" placeholder="Enter City Name">-->
+                  </div>
+
+                 
+                  <div class="form-group  add-admin col-md-12" style="margin: 10px 0px;">
+                       <input type="submit"  class="btn btn-primary"  style="width:20%;"> 
+                    </div>
+                </div>
+
+                </form>
+                </div>
+
+                <div class="full-city mt-3">
+                <div class="card-header">
+                  <h4>Help &  Support Inquiry </h4>
+                </div>
+              <table id="example" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="example_info" style="margin: 20px 00px;">
+                    <thead>
+                        
+                          <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="box: activate to sort column ascending" style="width: 20%;"> Support Email </th>
+                          <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 20%;"> Support Contact </th></tr>
+                      </thead>
+                      <tbody>
+                      <tr role="row" class="odd">
+                        <% if(support) { %>
+                           <td><p style="margin-bottom: 0rem;"><%- support.support_email %></p></td>
+                       <td><a href="#" class="btn btn-outline-primary"><%- support.support_contact %></a></td>
+
+                       <% } %> 
+                      </tr>
+
+              
+
+                    </tbody>
+                </table>
+                     </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </section>
+
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          COPYRIGHT MIE RIDE, 2023 Design & Developed by
+          <a href="https://cyberimpulses.com/">CISS</a></a>
+        </div>
+        <div class="footer-right">
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="assets/js/app.min.js"></script>
+  <!-- JS Libraies -->
+  <script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/index.js"></script>
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <!-- Custom JS File -->
+  <script src="assets/js/custom.js"></script>
+  <!-- DATA TABLES SCRIPT START -->
+
+</body>
+
+
+<!-- index  21 Nov 2019 03:47:04 GMT -->
+</html>

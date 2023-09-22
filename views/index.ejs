@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- index  21 Nov 2019 03:44:50 GMT -->
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title> MY HW COLLECTION HOME PAGE</title>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="../assets/css/app.min.css">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="../assets/css/custom.css">
+  <link rel='shortcut icon' type='image/x-icon' href='../assets/img/favicon.png' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+<body>
+  <div class="loader"></div>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar sticky">
+        <div class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
+									collapse-btn"> <i data-feather="align-justify"></i></a></li>
+          </ul>
+        </div>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="http://62.72.5.222:3005/uploads/<%- user.image %>"
+                class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
+            <div class="dropdown-menu dropdown-menu-right pullDown">
+               <!-- <div class="dropdown-title">Hello Sarah Smith</div> --> 
+              <a href="/profile" class="dropdown-item has-icon"> <i class="far fa-user"></i> Profile</a>
+              <div class="dropdown-divider"></div>
+              <a href="/logout" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="/"> <img alt="image" src="../assets/img/punocoin-logo.png" class="header-logo" />
+            </a>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Main</li>
+            <li class="dropdown active">
+              <a href="/" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+            </li>
+            <!-- <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                  data-feather="briefcase"></i><span>User Management</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="Admin_addadmin_management.html">Add User</a></li>
+                <li><a class="nav-link" href="Admin_viewadmin_management.html">View User</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>
+                 SubAdmin Management</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="Subadmin_add_management.html"> Add Sub Admin</a></li>
+                <li><a class="nav-link" href="Subadmin_view_management.html"> View Sub Admin</a></li>
+              </ul>
+            </li> -->
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>
+              User Managemnt </span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="/addUser">Add User</a></li>
+                <li><a class="nav-link" href="/viewUser">View User</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>
+              Product Managemnt </span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="/addproduct">Add Product</a></li>
+                <li><a class="nav-link" href="/products">View Product</a></li>
+              </ul>
+            </li>
+            <!-- <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Driver Management</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="Driver_add_management.html">Add Driver</a></li>
+                <li><a class="nav-link" href="Driver_view_management.html">View Driver </a></li>
+                       <li><a class="nav-link" href="Driver_withdraw_report_management.html">Driver Withdraw Report </a></li>
+              </ul>
+            </li> -->
+           <!-- <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                  data-feather="shopping-bag"></i><span>Product Reports</span></a>
+               <ul class="dropdown-menu">
+                <li><a class="nav-link" href="/ongoingBooking">Booking Ongoing</a></li>
+                <li><a class="nav-link" href="/bookHistory">Booking History</a></li>
+              </ul>
+            </li> -->
+           
+      
+              <li>
+                <a class="nav-link" href="/notifications">
+                  <i data-feather="sliders"></i>
+                  <span>Notification</span>
+                </a>
+                </li>
+                <li>
+                  <a class="nav-link" href="/imgreq">
+                    <i data-feather="sliders"></i>
+                    <span> Requested Images</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a class="nav-link" href="/query">
+                    <i data-feather="sliders"></i>
+                    <span> Query Tickets </span>
+                  </a>
+                </li>
+
+                <li class="dropdown">
+                  <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                      data-feather="alert-triangle"></i><span>Help & Support </span></a>
+                  <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="/support">add Inquiry Details</a></li>
+                    <!-- <li><a class="nav-link" href="Support_aboutUs.html">About Us</a></li> -->
+                  </ul>
+                </li> 
+               <li>
+                <a class="nav-link" href="/Faq_User">
+                  <i data-feather="flag"></i>
+                  <span>User Faq</span>
+                </a>         
+            
+            </li>
+            <li >
+    
+              <a class="nav-link" href="/TC_User">
+                <i data-feather="map"></i>
+                <span>User Terms & Conditions</span>
+              </a>  
+            </li>
+            <li >
+    
+              <a class="nav-link" href="/userPrivacy">
+                <i data-feather="user-check"></i>
+                <span>User  Privacy & Policy</span>
+              </a> 
+          
+            </li>
+            <li >
+    
+              <a class="nav-link" href="/aboutus">
+                <i data-feather="user-check"></i>
+                <span>  About Us </span>
+              </a>  
+            </li>
+              <li class="dropdown ">
+                 <a href="/logout" class="nav-link"><i data-feather="monitor"></i>
+                  <span>Logout</span></a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="fully-graph">
+                  <div class="fulls-headings">
+                     <h4> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> MYHW Statistics</h4>
+                   </div>
+          <div class="row ride-boxes">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <a href="#"><div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                        <div class="card-content wow zoomin">
+                          <h5 class="font-14">New Users</h5>
+                          <h2 class="mb-3 font-16"><%- users.length %></h2>
+                          <p class="mb-0"><span class="col-green"> Read </span> More</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                        <div class="banner-img">
+                          <img src="../assets/img/banner/banner-1.png" alt="" style="width: 90%;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                        <div class="card-content">
+                          <h5 class="font-14"> Sub Admin</h5>
+                          <h2 class="mb-3 font-16">0</h2>
+                          <p class="mb-0"><span class="col-green">Read </span> More</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                        <div class="banner-img">
+                          <img src="../assets/img/banner/banner-3.png" alt="" >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                        <div class="card-content">
+                          <h5 class="font-14">Total Earning</h5>
+                          <h2 class="mb-3 font-14">USD 0 </h2>
+                          <p class="mb-0"><span class="col-green"> Read </span> More </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                        <div class="banner-img">
+                          <img src="../assets/img/banner/banner-4.png" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+
+          <div class="row">
+            <div class="col-md-12">
+               <div class="fully-graph">
+                  <div class="fulls-headings">
+                     <h4> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>  MYHW Users & Products</h4>
+                   </div>
+                   <div class="counts-boxes">
+                   <div class="fullys-counts d-flex">
+                 <div class="full-counter">
+                    <div class="counter-headings">
+                        <h4>Users</h4>
+                      </div>
+                  </div>
+                   <div class="fulll-counterr">
+                    <div class="counter-headings">
+                        <h4>Tickets</h4>
+                      </div>
+                  </div>
+                  <div class="fulll-counterr">
+                    <div class="counter-headings">
+                        <h4>Product</h4>
+                      </div>
+                  </div>
+                </div>
+                   <div id="counter">   
+                    <div class="item">
+                       <h1 style="font-size: 24px;" class="count" data-number="<%- users.length %>" ></h1>
+                       <h3 style="font-size: 24px;" class="text">Users Count</h3>
+                       <ul>
+                         
+                        <li style="background-color: rgb(0, 156, 13); color: bisque;font-size: 20px;"> <a style="color: white;" href="/viewUser"> Active Users <%- Ausers %> </a>    </li>
+                         <li style="background-color: brown; color: bisque;font-size: 20px; "> <a style="color: white;" href="/viewUser"> Inactive Users  <%- Dusers %> </a> </li>
+                       </ul>
+                      </div>
+                <div class="item">
+                     <h1 style="font-size: 24px; "class="count" data-number="<%- totalQ %>" ></h1>
+                     <h3 style="font-size: 24px;" class="text">User Complaints </h3>
+                      <ul>
+                        
+                        <li style="background-color: rgb(0, 156, 13); color: bisque;font-size: 20px;"> <a style="color: white;" href="/query"> Open Tickets <%- openQ.length %> </a> </li>
+                         <li style="background-color: brown; color: bisque;font-size: 20px;"><a style="color: white;" href="/query"> Closed Tickets <%-closedQ.length%> </a></li>
+                       </ul>
+                  </div>
+                  <div class="item">
+                    <h1 style="font-size: 24px;"  class="count" data-number="<%-  totalP %>" ></h1>
+                    <h3 style="font-size: 24px;" class="text">Products Count </h3>
+                     <ul>
+                        <li style="background-color: rgb(0, 156, 13); color: bisque;font-size: 20px;"> <a style="color: white;" href="/products"> InStoke  <%- Iproducts %> </a></li>
+                         <li style="background-color: brown; color: bisque;font-size: 20px;"> <a style="color: white;" href="/products"> Out of Stoke  <%- Oproducts %> </a> </li>
+                      </ul>
+                 </div>
+                <!--   <div class="item">
+                     <h1 class="count" data-number="2040" ></h1>
+                     <h3 class="text">project completed</h3>
+                  </div>
+                  <div class="item">
+                     <h1 class="count" data-number="1018" ></h1>
+                     <h3 class="text">happy clients</h3>
+                  </div> -->
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+       
+        </section>
+        <!-- <div class="settingSidebar">
+          <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
+          </a>
+          <div class="settingSidebar-body ps-container ps-theme-default">
+            <div class=" fade show active">
+              <div class="setting-panel-header">Setting Panel
+              </div>
+              <div class="p-15 border-bottom">
+                <h6 class="font-medium m-b-10">Select Layout</h6>
+                <div class="selectgroup layout-color w-50">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="value" value="1" class="selectgroup-input-radio select-layout" checked>
+                    <span class="selectgroup-button">Light</span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="value" value="2" class="selectgroup-input-radio select-layout">
+                    <span class="selectgroup-button">Dark</span>
+                  </label>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <h6 class="font-medium m-b-10">Sidebar Color</h6>
+                <div class="selectgroup selectgroup-pills sidebar-color">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="icon-input" value="1" class="selectgroup-input select-sidebar">
+                    <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip"
+                      data-original-title="Light Sidebar"><i class="fas fa-sun"></i></span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="icon-input" value="2" class="selectgroup-input select-sidebar" checked>
+                    <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip"
+                      data-original-title="Dark Sidebar"><i class="fas fa-moon"></i></span>
+                  </label>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <h6 class="font-medium m-b-10">Color Theme</h6>
+                <div class="theme-setting-options">
+                  <ul class="choose-theme list-unstyled mb-0">
+                    <li title="white" class="active">
+                      <div class="white"></div>
+                    </li>
+                    <li title="cyan">
+                      <div class="cyan"></div>
+                    </li>
+                    <li title="black">
+                      <div class="black"></div>
+                    </li>
+                    <li title="purple">
+                      <div class="purple"></div>
+                    </li>
+                    <li title="orange">
+                      <div class="orange"></div>
+                    </li>
+                    <li title="green">
+                      <div class="green"></div>
+                    </li>
+                    <li title="red">
+                      <div class="red"></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <div class="theme-setting-options">
+                  <label class="m-b-0">
+                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input"
+                      id="mini_sidebar_setting">
+                    <span class="custom-switch-indicator"></span>
+                    <span class="control-label p-l-10">Mini Sidebar</span>
+                  </label>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <div class="theme-setting-options">
+                  <label class="m-b-0">
+                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input"
+                      id="sticky_header_setting">
+                    <span class="custom-switch-indicator"></span>
+                    <span class="control-label p-l-10">Sticky Header</span>
+                  </label>
+                </div>
+              </div>
+              <div class="mt-4 mb-4 p-3 align-center rt-sidebar-last-ele">
+                <a href="#" class="btn btn-icon icon-left btn-primary btn-restore-theme">
+                  <i class="fas fa-undo"></i> Restore Default
+                </a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          COPYRIGHT MIE RIDE, 2023 Design & Developed by
+          <a href="https://cyberimpulses.com/">CISS</a></a>
+        </div>
+        <div class="footer-right">
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="../assets/js/app.min.js"></script>
+  <!-- JS Libraies -->
+  <script src="../assets/bundles/apexcharts/apexcharts.min.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="../assets/js/page/index.js"></script>
+  <!-- Template JS File -->
+  <script src="../assets/js/scripts.js"></script>
+  <!-- Custom JS File -->
+  <script src="../assets/js/custom.js"></script>
+  <script >
+    let count = document.querySelectorAll(".count")
+let arr = Array.from(count)
+arr.map(function(item){
+  let startnumber = 0
+  function counterup(){
+  startnumber++
+  item.innerHTML= startnumber
+ if(startnumber == item.dataset.number){
+    clearInterval(stop)
+  }
+}
+let stop =setInterval(function(){
+  counterup()
+},100)
+})
+  </script>
+</body>
+
+
+<!-- index  21 Nov 2019 03:47:04 GMT -->
+</html>

@@ -1,0 +1,116 @@
+<%- include ("header.ejs") %>
+<%- include ("navbar.ejs") %>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+           <div class="fully-page">
+             <div class="full-headings">
+               <h4>Notifications</h4>
+               <font color="green" size="5"><%- output %></font>
+             </div>
+             <div class="box-bodys">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="forms-img">
+                     <img src="assets/img/login-bg/notification11.jpg" style="width: 100%;height: 365px;">
+                  </div>
+                </div>
+                 <div class="col-md-8">
+                  <div class="full-forms">
+                    <form action="/notifications" method="post"> 
+                 <div class="form-group row">
+          
+                <div class="form-group add-admin col-md-12">
+                    <label class="control-label" for="emailSubject">Notification Title</label>
+                    <input type="text" name="emailSubject" class="form-control required" placeholder="Add Title" required="">
+                </div>
+
+                    <div class="form-group add-admin col-md-6">
+                        <label class="control-label" for="recipientEmail">Select User </label>
+
+                        
+                        <!-- <select name="recipientEmail" id="cars">
+                              <option value="volvo">Select User </option>
+                              <% if(users){
+                              for(var i = 0; i< users.length; i++) {%> 
+                                <option id="userID" value="<%= users[i].email %>">
+                                  <%= users[i].firstname%> <%= users[i].lastname %>
+                                  </option>
+
+                              <% } } %>
+                        </select> -->
+
+                        <select name="recipientEmail" id="cars" multiple>
+                          <!-- <option value="volvo">Select User</option> -->
+                          <% if (users) {
+                            for (var i = 0; i < users.length; i++) { %>
+                              <option id="userID" value="<%= users[i].email %>">
+                                <%= users[i].firstname %> <%= users[i].lastname %>
+                              </option>
+                          <% } } %>
+                        </select>
+                    </div>
+                    
+                  <div class="form-group add-admin col-md-12">
+                            <label class="control-label" for="emailMessage">Send Notification</label>
+                            <textarea name="emailMessage" class="form-control required" required="" style="box-shadow: 0px 2px 20px rgb( 0 0 0 /10%);background: white;"></textarea>
+                        </div>
+                    <div class="form-group  add-admin col-md-12" style="margin-bottom: 0px;">
+                       <input type="submit" name="add" class="btn btn-primary" value="Submit"> 
+                    </div> 
+                    
+                  </div>
+                </form>  
+                 </div>
+                  </div>
+             </div>
+           </div>
+          </div>
+        </section>
+     
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          COPYRIGHT MIE RIDE, 2023 Design & Developed by
+          <a href="https://cyberimpulses.com/">CISS</a></a>
+        </div>
+        <div class="footer-right">
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="assets/js/app.min.js"></script>
+  <!-- JS Libraies -->
+  <script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/index.js"></script>
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <!-- Custom JS File -->
+  <script src="assets/js/custom.js"></script>
+</body>
+
+
+<!-- index  21 Nov 2019 03:47:04 GMT -->
+</html>
+
+<script>
+
+function notifyUser(id,status)
+{ 
+
+ 
+   $.ajax({
+
+                url: "/query",
+                type: "POST",
+                data:{ id : id , status:status},
+                dataType: 'json',
+                    success: function(result) { 
+                      window.location.href="/query"
+                }
+                }
+            )
+}
+</script>

@@ -1,0 +1,85 @@
+<%- include ("header.ejs") %>
+<%- include ("navbar.ejs") %>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+           <div class="fully-page">
+             <div class="full-headings">
+               <h4>View & Edit Product Management</h4>
+             </div>
+             <div class="box-bodys" style="padding: 0px;">
+            
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="forms-img">
+                     <img src="http://62.72.5.222:3005/uploads/<%- product.image %>" style="width: 300px; height: 420px;">
+                  </div>
+                </div>
+                 <div class="col-md-8">
+                  <font color="green" size="5"><%- output %></font>
+                  <form method="post" action="/editproduct" enctype="multipart/form-data" class="needs-validation" novalidate="">
+                  <div class="full-forms">
+                 <div class="form-group row">
+
+                  <input type="hidden" name="productID"  value="<%- product.productID %>" >
+                  
+                <div class="form-group add-admin col-md-6">
+                    <label class="control-label" for="toy">Toy </label>
+                    <input type="text" name="toy" class="form-control required" placeholder="Toy"  value="<%- product.toy %>" >
+                </div>
+                <div class="form-group add-admin col-md-6">
+                  <label class="control-label" for="colnum">Collection Number </label>
+                  <input type="number" name="colnum" class="form-control required" placeholder="Collection Number "   value="<%- product.colnum %>">
+              </div>
+                 <div class="form-group add-admin col-md-6">
+                    <label class="control-label" for="modname">Model Name </label>
+                    <input type="text" name="modname" class="form-control required" placeholder="Model Name "  value="<%- product.modname %>">
+                </div>
+                    
+                    <div class="form-group add-admin col-md-12">
+                        <label class="control-label" for="sname">Series Name</label>
+                        <input type="text" name="sname" class="form-control required" placeholder="Series Name"  value="<%- product.sname %>">
+                    </div>
+                    <div class="form-group add-admin col-md-12">
+                      <label class="control-label" for="snum">Series Number</label>
+                      <input type="number" name="snum" class="form-control required" placeholder="Series Number"  value="<%- product.snum %>">
+                  </div>
+                    <div class="form-group add-admin col-md-12">
+                        <label class="control-label" for="image"> Product Image</label><br>
+                        <input type="file" name="image" onchange="validateImage(this)" id="image" class="" size="20"  >
+                        <div id="image_req" style="color: red"></div>
+                    </div>
+                    <div class="form-group  add-admin mt-3 col-md-12" style="margin-bottom: 0px;">
+                       <input type="submit" class="btn btn-primary"> 
+                       
+                    </div> 
+                  </div>  
+                  </div>
+                </form>
+                 </div>
+             </div>
+            
+           </div>
+          </div>
+        </section>
+
+      </div>
+      <%- include ("footer.ejs") %>
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="assets/js/app.min.js"></script>
+  <!-- JS Libraies -->
+  <script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/index.js"></script>
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <!-- Custom JS File -->
+  <script src="assets/js/custom.js"></script>
+</body>
+
+
+<!-- index  21 Nov 2019 03:47:04 GMT -->
+</html>

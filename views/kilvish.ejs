@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Schema Visualization</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <div id="myDiagramDiv" style="width: 800px; height: 600px;"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.1.21/go.js"></script>
+    <script>
+        function init() {
+            const $ = go.GraphObject.make;
+            const myDiagram = new go.Diagram("myDiagramDiv", {
+                validCycle: go.Diagram.CycleNotDirected,
+                "undoManager.isEnabled": true
+            });
+
+            // Fetch database schema data from the server
+            fetch('/schema')
+                .then(response => response.json())
+                .then(data => {
+                    // Process and create nodes and links based on data
+                    const nodeDataArray = [];
+                    const linkDataArray = [];
+
+                    // Loop through the data to create nodes and links
+                    data.forEach(table => {
+                        const tableName = table.tableName;
+                        nodeDataArray.push({ key: tableName, name: tableName });
+
+                        // Create links for columns
+                        table.columns.forEach(column => {
+                            const columnName = column.Field;
+                            linkDataArray.push({ from: tableName, to: columnName });
+                        });
+                    });
+
+                    // Set diagram model
+                    myDiagram.model = new go.GraphLinksModel({
+                        nodeDataArray: nodeDataArray,
+                        linkDataArray: linkDataArray
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching schema data:', error);
+                });
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

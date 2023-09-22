@@ -1,0 +1,166 @@
+<%- include ("header.ejs") %>
+<%- include ("navbar.ejs") %>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="row">
+            <div class="fully-tables">
+               <div class="cards-headers">
+                  <h4>Driver  Faq Management</h4>
+                </div>
+                
+                  <div id="wysiwyg">
+                      <div class="btns">
+                        <div class="category">
+                          <button data-cmd="undo">
+                            <i class="fas fa-undo"></i>
+                          </button>
+                          <button data-cmd="redo">
+                            <i class="fas fa-redo"></i>
+                          </button>
+                        </div>
+                        <div class="category">
+                          <select data-cmd="formatBlock">
+                            <option value="p">Paragraph</option>
+                            <option value="h1">Title 1</option>
+                            <option value="h2">Title 2</option>
+                            <option value="h3">Title 3</option>
+                          </select>
+                          <select data-cmd="fontSize">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                          </select>
+                          <select data-cmd="fontName">
+                            <option value="Arial">Arial</option>
+                            <option value="Roboto">Roboto</option>
+                            <option value="serif">Serif</option>
+                            <option value="sans-serif">Sans-serif</option>
+                          </select>
+                        </div>
+                        <div class="category">
+                          <button data-cmd="bold">
+                            <i class="fas fa-bold"></i>
+                          </button>
+                          <button data-cmd="italic">
+                            <i class="fas fa-italic"></i>
+                          </button>
+                          <button data-cmd="underline">
+                            <i class="fas fa-underline"></i>
+                          </button>
+                        </div>
+                        
+                        <div class="category">
+                          <input data-cmd="forecolor" type="color" value="#000000">
+                          <input data-cmd="backcolor" type="color" value="#FFFFFF">
+                        </div>
+                        
+                        <div class="category">
+                          <button data-cmd="justifyLeft">
+                            <i class="fas fa-align-left"></i>
+                          </button>
+                          <button data-cmd="justifyCenter">
+                            <i class="fas fa-align-center"></i>
+                          </button>
+                          <button data-cmd="justifyRight">
+                            <i class="fas fa-align-right"></i>
+                          </button>
+                          <button data-cmd="justifyFull">
+                            <i class="fas fa-align-justify"></i>
+                          </button>
+                        </div>
+                        
+                        <div class="category">
+                          <button data-cmd="indent">
+                            <i class="fas fa-indent"></i>
+                          </button>
+                          <button data-cmd="outdent">
+                            <i class="fas fa-outdent"></i>
+                          </button>
+                        </div>
+                        
+                        <div class="category">
+                          <button data-cmd="insertUnorderedList">
+                            <i class="fas fa-list-ul"></i>
+                          </button>
+                          <button data-cmd="insertOrderedList">
+                            <i class="fas fa-list-ol"></i>
+                          </button>
+                        </div>
+                        
+                        <div class="category">
+                          <button data-cmd="createlink" class="prompt">
+                            <i class="fas fa-link"></i>
+                          </button>
+                          <button data-cmd="insertimage" class="prompt">
+                            <i class="fas fa-image"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div id="editor" contentEditable>
+                        <h2>Type anything you want!</h2>
+                        <p>Here is a paragraph.</p>
+                      </div>
+                    </div>
+                    <div class="add-admin" style="margin-bottom: 0px;">
+                       <input type="submit" name="add" class="btn btn-primary" value="Submit" style="width:20%;margin-left: 10px;"> 
+                    </div>
+                    <div class="fulls-headings mt-4">
+                     <h4> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>  Driver Frequently Asked Question </h4>
+                   </div>
+                   <table id="example" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="example_info" style="margin: 20px 00px;">
+                    <thead>
+                         <tr role="row">
+                          <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Id: activate to sort column descending" style="width: 10%;" aria-sort="ascending">s.no</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Id: activate to sort column descending" style="width: 15%;" aria-sort="ascending">Question</th>
+                          <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="box: activate to sort column ascending" style="width: 60%;">faq Question</th>
+                          <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 15%;">Action</th></tr>
+                      </thead>
+                      <tbody>
+                      <tr role="row" class="odd">
+                          <td class="sorting_1">1</td>
+                             <td>Decide how you'll organize the FAQ pages</td>
+                           <td><p style="margin-bottom: 0rem;">A Terms and Conditions agreement acts as legal contracts between you (the company) who has the website or mobile app, and the user who accesses your website/app.</p>
+                           <p style="margin-bottom: 0rem;">A Terms and Conditions agreement acts as legal contracts between you (the company) who has the website or mobile app, and the user who accesses your website/app.</p></td>
+                       <td><a href="#" class="btn btn-outline-primary">Detail</a></td>
+                       
+                      </tr>
+                       <tr role="row" class="even">
+                          <td class="sorting_1">2</td>
+                             <td>Decide how you'll organize the FAQ pages</td>
+                           <td><p style="margin-bottom: 0rem;">A Terms and Conditions agreement acts as legal contracts between you (the company) who has the website or mobile app, and the user who accesses your website/app.</p>
+                           <p style="margin-bottom: 0rem;">A Terms and Conditions agreement acts as legal contracts between you (the company) who has the website or mobile app, and the user who accesses your website/app.</p></td>
+                       <td><a href="#" class="btn btn-outline-primary">Detail</a></td>
+                       
+                      </tr>
+                    </tbody>
+                    </table>
+
+                      </div>
+                     </div>
+                 </section>
+           </div>
+           <%- include ("footer.ejs") %>
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="assets/js/app.min.js"></script>
+  <!-- JS Libraies -->
+  <script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/index.js"></script>
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <!-- Custom JS File -->
+  <script src="assets/js/custom.js"></script>
+  <script src="assets/js/text-editor.js"></script>
+</body>
+
+
+<!-- index  21 Nov 2019 03:47:04 GMT -->
+</html>

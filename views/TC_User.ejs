@@ -1,0 +1,192 @@
+<%- include ("header.ejs") %>
+<%- include ("navbar.ejs") %>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="full-city">
+                    <div class="card-header">
+                  <h4> Add Terms and Conditions here  </h4>
+                </div>
+                <font color="green" size="5"><%- output %></font>
+
+                <div id="wysiwyg">
+                  <div class="btns">
+                    <div class="category">
+                      <button data-cmd="undo">
+                        <i class="fas fa-undo"></i>
+                      </button>
+                      <button data-cmd="redo">
+                        <i class="fas fa-redo"></i>
+                      </button>
+                    </div>
+                    <div class="category">
+                      <select data-cmd="formatBlock">
+                        <option value="p">Paragraph</option>
+                        <option value="h1">Title 1</option>
+                        <option value="h2">Title 2</option>
+                        <option value="h3">Title 3</option>
+                      </select>
+                      <select data-cmd="fontSize">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                      </select>
+                      <select data-cmd="fontName">
+                        <option value="Arial">Arial</option>
+                        <option value="Roboto">Roboto</option>
+                        <option value="serif">Serif</option>
+                        <option value="sans-serif">Sans-serif</option>
+                      </select>
+                    </div>
+                    <div class="category">
+                      <button data-cmd="bold">
+                        <i class="fas fa-bold"></i>
+                      </button>
+                      <button data-cmd="italic">
+                        <i class="fas fa-italic"></i>
+                      </button>
+                      <button data-cmd="underline">
+                        <i class="fas fa-underline"></i>
+                      </button>
+                    </div>
+                    
+                    <div class="category">
+                      <input data-cmd="forecolor" type="color" value="#000000">
+                      <input data-cmd="backcolor" type="color" value="#FFFFFF">
+                    </div>
+                    
+                    <div class="category">
+                      <button data-cmd="justifyLeft">
+                        <i class="fas fa-align-left"></i>
+                      </button>
+                      <button data-cmd="justifyCenter">
+                        <i class="fas fa-align-center"></i>
+                      </button>
+                      <button data-cmd="justifyRight">
+                        <i class="fas fa-align-right"></i>
+                      </button>
+                      <button data-cmd="justifyFull">
+                        <i class="fas fa-align-justify"></i>
+                      </button>
+                    </div>
+                    
+                    <div class="category">
+                      <button data-cmd="indent">
+                        <i class="fas fa-indent"></i>
+                      </button>
+                      <button data-cmd="outdent">
+                        <i class="fas fa-outdent"></i>
+                      </button>
+                    </div>
+                    
+                    <div class="category">
+                      <button data-cmd="insertUnorderedList">
+                        <i class="fas fa-list-ul"></i>
+                      </button>
+                      <button data-cmd="insertOrderedList">
+                        <i class="fas fa-list-ol"></i>
+                      </button>
+                    </div>
+                    
+                    <div class="category">
+                      <button data-cmd="createlink" class="prompt">
+                        <i class="fas fa-link"></i>
+                      </button>
+                      <button data-cmd="insertimage" class="prompt">
+                        <i class="fas fa-image"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <form method="post" action="/TC_User" id="faqForm" class="needs-validation" novalidate="">
+                  <div id="editor" contentEditable>                        
+                   
+
+                  </div>
+                </div>
+                <!-- <input type="hidden" id="kilvish" name="faqID" > -->
+                <div class="add-admin" style="margin-bottom: 0px;">
+                   <input type="submit" class="btn btn-primary"  style="width:20%;margin-left: 10px;"> 
+                </div>
+
+               
+
+              </form>
+              
+          
+                </div>
+
+                <div class="full-city mt-3">
+                <div class="card-header">
+                  <h4> Terms and Conditions </h4>
+
+                 
+                </div>
+              <table id="example" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="example_info" style="margin: 20px 00px;">
+              
+                <% if(TandC) { %>
+                  <%- TandC.terms %>
+                  <% } %>
+              </table>
+                     </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </section>
+
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          COPYRIGHT MIE RIDE, 2023 Design & Developed by
+          <a href="https://cyberimpulses.com/">CISS</a></a>
+        </div>
+        <div class="footer-right">
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="assets/js/app.min.js"></script>
+  <!-- JS Libraies -->
+  <script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/index.js"></script>
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <!-- Custom JS File -->
+  <script src="assets/js/custom.js"></script>
+  <!-- DATA TABLES SCRIPT START -->
+
+</body>
+
+
+<!-- index  21 Nov 2019 03:47:04 GMT -->
+</html>
+
+<script> 
+
+document.getElementById("faqForm").addEventListener("submit", function (event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  const faq = document.getElementById("editor").innerHTML;
+  const hiddenInput = document.createElement("input");
+  hiddenInput.type = "hidden";
+  hiddenInput.name = "faq";
+  hiddenInput.value = faq;
+
+  this.appendChild(hiddenInput);
+
+  // Now submit the form
+  this.submit();
+});
+
+
+</script>
